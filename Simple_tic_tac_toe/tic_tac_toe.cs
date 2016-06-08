@@ -30,7 +30,160 @@ namespace Simple_tic_tac_toe
             int cellX = cell[0];
             int cellY = cell[1];
             if (canMove(ref cellX, ref cellY))
+            {
                 move(ref cellX, ref cellY);
+                if (checkForWin())
+                    new_game(gridWidth,gridHeight);
+            }
+        }
+
+        /*** в принципе, функцию можно было сделать намного проще, но я сделал универсальный вариант,
+         *   подходящий для игры любой сложности (не только 3х3) 
+         ***/
+        private static bool checkForWin()
+        {
+            bool xWins = false;
+            bool oWins = false;
+
+            /*** проверяем столбики ***/
+            for (int i = 0; i < 3; i++)  
+            {
+                xWins = true;  
+                oWins = true;
+                for (int j = 0; j < 3; j++)
+                {
+                    if (grid[i, j] == (int)shapes.NONE)
+                    {
+                        xWins = false;
+                        oWins = false;
+                        break;
+                    }
+                    if (grid[i, j] == (int)shapes.X)
+                    {
+                        oWins = false;
+                        continue;
+                    }
+                    else
+                    {
+                        xWins = false;
+                        continue;
+                    }
+                }
+                if (xWins)
+                {
+                    MessageBox.Show("X wins!");
+                    return true;
+                }
+                if (oWins)
+                {
+                    MessageBox.Show("O wins!");
+                    return true;
+                }
+            }
+
+            /*** проверяем строки ***/
+            for (int i = 0; i < 3; i++)
+            {
+                xWins = true;
+                oWins = true;
+                for (int j = 0; j < 3; j++)
+                {
+                    if (grid[j, i] == (int)shapes.NONE)
+                    {
+                        xWins = false;
+                        oWins = false;
+                        break;
+                    }
+                    if (grid[j, i] == (int)shapes.X)
+                    {
+                        oWins = false;
+                        continue;
+                    }
+                    else
+                    {
+                        xWins = false;
+                        continue;
+                    }
+                }
+                if (xWins)
+                {
+                    MessageBox.Show("X wins!");
+                    return true;
+                }
+                if (oWins)
+                {
+                    MessageBox.Show("O wins!");
+                    return true;
+                }
+            }
+
+            /*** проверяем главную диагональ ***/
+            xWins = true;
+            oWins = true;
+            for (int i = 0; i < 3; i++)
+            {
+                if (grid[i, i] == (int)shapes.NONE)
+                {
+                    xWins = false;
+                    oWins = false;
+                    break;
+                }
+                if (grid[i, i] == (int)shapes.X)
+                {
+                    oWins = false;
+                    continue;
+                }
+                else
+                {
+                    xWins = false;
+                    continue;
+                }
+            }
+            if (xWins)
+            {
+                MessageBox.Show("X wins!");
+                return true;
+            }
+            if (oWins)
+            {
+                MessageBox.Show("O wins!");
+                return true;
+            }
+
+            /*** проверяем побочную диагональ ***/
+            xWins = true;
+            oWins = true;
+            for (int i = 2, j = 0; i >= 0; i--, j++)
+            {
+                if (grid[i, j] == (int)shapes.NONE)
+                {
+                    xWins = false;
+                    oWins = false;
+                    break;
+                }
+                if (grid[i, j] == (int)shapes.X)
+                {
+                    oWins = false;
+                    continue;
+                }
+                else
+                {
+                    xWins = false;
+                    continue;
+                }
+            }
+            if (xWins)
+            {
+                MessageBox.Show("X wins!");
+                return true;
+            }
+            if (oWins)
+            {
+                MessageBox.Show("O wins!");
+                return true;
+            }
+
+            return false;
         }
 
         private static bool canMove(ref int cellX, ref int cellY)
