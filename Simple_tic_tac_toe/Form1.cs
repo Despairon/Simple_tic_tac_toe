@@ -8,7 +8,7 @@ namespace Simple_tic_tac_toe
         public Form1()
         {
             InitializeComponent();
-            Render.init(ref graphicsInterface);
+            Render.init(ref graphicsInterface); 
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -18,22 +18,22 @@ namespace Simple_tic_tac_toe
 
         private void renderTimer_Tick(object sender, EventArgs e)
         {
-            Render.drawAll();
+            Render.drawAll();  
         }
 
         private void graphicsInterface_MouseClick(object sender, MouseEventArgs e)
         {
-            Tic_tac_toe.onClick(e.X, e.Y);
+            Tic_tac_toe.onClick(e.X, e.Y); 
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Tic_tac_toe.new_game(graphicsInterface.Width, graphicsInterface.Height);
+            Tic_tac_toe.new_game(graphicsInterface.Width, graphicsInterface.Height); 
         }
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            Tic_tac_toe.new_game(graphicsInterface.Width, graphicsInterface.Height);
+            Tic_tac_toe.new_game(graphicsInterface.Width, graphicsInterface.Height);  
         }
     }
 }

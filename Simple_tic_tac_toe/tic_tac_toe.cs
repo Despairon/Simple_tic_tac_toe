@@ -8,80 +8,75 @@ namespace Simple_tic_tac_toe
         X = 1,
         O = 2
     }
-
+    
     public static class Tic_tac_toe
     {
         public static void new_game(int width, int height)
         {
-            grid = new int[3, 3];
-            gridWidth = width;
+            grid = new int[3, 3];   
+            gridWidth = width;      
             gridHeight = height;
-            currMove = (int)shapes.X;
-            Render.clear();
+            currMove = (int)shapes.X; 
+            Render.clear();           
         }
-        private static int[,] grid;
-        private static int currMove;
-        private static int gridWidth;
-        private static int gridHeight;
+        private static int[,] grid;     
+        private static int currMove;    
+        private static int gridWidth;  
+        private static int gridHeight;  
 
-        public static void onClick(int x, int y)
+        public static void onClick(int x, int y) 
         {
-            int[] cell = clickedCell(ref x, ref y);
-            int cellX = cell[0];
+            int[] cell = clickedCell(ref x, ref y);     
+            int cellX = cell[0];                         
             int cellY = cell[1];
-            if (canMove(ref cellX, ref cellY))
+            if (canMove(ref cellX, ref cellY))          
             {
-                move(ref cellX, ref cellY);
-                if (checkForWin())
-                    new_game(gridWidth,gridHeight);
+                move(ref cellX, ref cellY);            
+                if (checkForWin())                      
+                    new_game(gridWidth,gridHeight);     
             }
         }
 
-        /*** в принципе, функцию можно было сделать намного проще, но я сделал универсальный вариант,
-         *   подходящий для игры любой сложности (не только 3х3) 
-         ***/
         private static bool checkForWin()
         {
-            bool xWins = false;
+            bool xWins = false;     
             bool oWins = false;
 
-            /*** проверяем столбики ***/
             for (int i = 0; i < 3; i++)  
             {
-                xWins = true;  
+                xWins = true;       
                 oWins = true;
                 for (int j = 0; j < 3; j++)
                 {
-                    if (grid[i, j] == (int)shapes.NONE)
+                    if (grid[i, j] == (int)shapes.NONE)   
                     {
-                        xWins = false;
+                        xWins = false;                   
                         oWins = false;
-                        break;
+                        break;                           
                     }
-                    if (grid[i, j] == (int)shapes.X)
+                    if (grid[i, j] == (int)shapes.X)    
                     {
-                        oWins = false;
-                        continue;
+                        oWins = false;                  
+                        continue;                       
                     }
-                    else
+                    else                                
                     {
-                        xWins = false;
-                        continue;
+                        xWins = false;                  
+                        continue;                       
                     }
                 }
-                if (xWins)
+                if (xWins)                         
                 {
-                    MessageBox.Show("X wins!");
-                    return true;
+                    MessageBox.Show("X wins!");     
+                    return true;                    
                 }
-                if (oWins)
+                if (oWins)                          
                 {
                     MessageBox.Show("O wins!");
                     return true;
                 }
             }
 
-            /*** проверяем строки ***/
             for (int i = 0; i < 3; i++)
             {
                 xWins = true;
@@ -117,7 +112,6 @@ namespace Simple_tic_tac_toe
                 }
             }
 
-            /*** проверяем главную диагональ ***/
             xWins = true;
             oWins = true;
             for (int i = 0; i < 3; i++)
@@ -150,7 +144,6 @@ namespace Simple_tic_tac_toe
                 return true;
             }
 
-            /*** проверяем побочную диагональ ***/
             xWins = true;
             oWins = true;
             for (int i = 2, j = 0; i >= 0; i--, j++)
@@ -188,25 +181,25 @@ namespace Simple_tic_tac_toe
 
         private static bool canMove(ref int cellX, ref int cellY)
         {
-            if (grid[cellX, cellY] == (int)shapes.NONE)
+            if (grid[cellX, cellY] == (int)shapes.NONE)  
                 return true;
-            return false;
+            return false;           
         } 
 
         private static int[] clickedCell(ref int x, ref int y)
         { 
-            int[] cell = new int[2] { -1 , -1 };
-            float dx = (float)x / (float)gridWidth;
-            float dy = (float)y / (float)gridHeight;
-            if (dx < 0.33f)
+            int[] cell = new int[2] { -1 , -1 };    
+            float dx = (float)x / (float)gridWidth; 
+            float dy = (float)y / (float)gridHeight; 
+            if (dx < 0.33f)     
                 cell[0] = 0;
             else
-            if (dx > 0.33f && dx < 0.66f)
+            if (dx > 0.33f && dx < 0.66f)   
                 cell[0] = 1;
-            else
+            else                            
                 cell[0] = 2;
 
-            if (dy < 0.33f)
+            if (dy < 0.33f)  
                 cell[1] = 0;
             else
             if (dy > 0.33f && dy < 0.66f)
@@ -214,59 +207,59 @@ namespace Simple_tic_tac_toe
             else
                 cell[1] = 2;
 
-            return cell;
+            return cell;        
         }
 
         private static void move(ref int cellX, ref int cellY)
         {
-            int x;
-            int y;
+            int x;  
+            int y;  
             translateCellToCoords(ref cellX, ref cellY, out x, out y);
-            switch (currMove)
+            switch (currMove)  
             {
-                case (int)shapes.X:
-                    Render.addX(ref x, ref y);
-                    grid[cellX, cellY] = (int)shapes.X;
-                    currMove = (int)shapes.O;
+                case (int)shapes.X:  
+                    Render.addX(ref x, ref y);   
+                    grid[cellX, cellY] = (int)shapes.X;  
+                    currMove = (int)shapes.O;  
                 break;
-                case (int)shapes.O:
-                    Render.addO(ref x, ref y);
-                    grid[cellX, cellY] = (int)shapes.O;
-                    currMove = (int)shapes.X;
+                case (int)shapes.O:  
+                    Render.addO(ref x, ref y);  
+                    grid[cellX, cellY] = (int)shapes.O;  
+                    currMove = (int)shapes.X;   
                 break;
             }
         }
 
         private static void translateCellToCoords(ref int cellX, ref int cellY, out int x, out int y)
         {
-            switch (cellX)
+            switch (cellX)  
             {
-                case 0:
-                    x = (int)((0.33f / 2) * gridWidth);
+                case 0:  
+                    x = (int)((0.33f / 2) * gridWidth); 
                 break;
-                case 1:
-                    x = (int)(( (0.33f + 0.66f) / 2) * gridWidth);
-                break;
-                case 2:
-                    x = (int)(( (0.66f + 0.99f) / 2) * gridWidth);
-                break;
-                default:
+                case 1:  
+                    x = (int)(( (0.33f + 0.66f) / 2) * gridWidth);  
+                    break;
+                case 2: 
+                    x = (int)(( (0.66f + 0.99f) / 2) * gridWidth);  
+                    break;
+                default: 
                     x = -1;
                 break;
             }
 
-            switch (cellY)
+            switch (cellY) 
             {
                 case 0:
-                    y = (int)((0.33f / 2) * gridHeight);
+                    y = (int)((0.33f / 2) * gridHeight); 
                     break;
-                case 1:
-                    y = (int)(((0.33f + 0.66f) / 2) * gridHeight);
+                case 1: 
+                    y = (int)(((0.33f + 0.66f) / 2) * gridHeight);  
                     break;
-                case 2:
-                    y = (int)(((0.66f + 0.99f) / 2) * gridHeight);
+                case 2: 
+                    y = (int)(((0.66f + 0.99f) / 2) * gridHeight);  
                     break;
-                default:
+                default: 
                     y = -1;
                 break;
             }
