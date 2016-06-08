@@ -60,8 +60,9 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
@@ -79,12 +80,14 @@
             this.graphicsInterface.AutoSwapBuffers = true;
             this.graphicsInterface.BackColor = System.Drawing.Color.Black;
             this.graphicsInterface.ColorBits = ((byte)(32));
+            this.graphicsInterface.Cursor = System.Windows.Forms.Cursors.Hand;
             this.graphicsInterface.DepthBits = ((byte)(16));
             this.graphicsInterface.Location = new System.Drawing.Point(12, 27);
             this.graphicsInterface.Name = "graphicsInterface";
             this.graphicsInterface.Size = new System.Drawing.Size(600, 403);
             this.graphicsInterface.StencilBits = ((byte)(0));
             this.graphicsInterface.TabIndex = 1;
+            this.graphicsInterface.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsInterface_MouseClick);
             // 
             // renderTimer
             // 
@@ -103,6 +106,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Simple tic-tac-toe";
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
