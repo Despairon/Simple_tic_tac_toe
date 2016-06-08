@@ -123,6 +123,18 @@ namespace Simple_tic_tac_toe
         {
             geometrics.Clear();
         }
+
+        /*** функция рисует крестик по указанным координатам ***/
+        public static void addX(ref int x, ref int y)
+        {
+            geometrics.Add(new X(x, y));
+        }
+
+        /*** функция рисует нолик по указанным координатам ***/
+        public static void addO(ref int x, ref int y)
+        {
+            geometrics.Add(new O(x, y));
+        }
     }
 
     /*** абстрактный класс "фигура". Проявление полиморфизма : может быть ТОЛЬКО либо

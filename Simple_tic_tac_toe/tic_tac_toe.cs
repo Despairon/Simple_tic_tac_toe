@@ -66,17 +66,58 @@ namespace Simple_tic_tac_toe
 
         private static void move(ref int cellX, ref int cellY)
         {
+            int x;
+            int y;
+            translateCellToCoords(ref cellX, ref cellY, out x, out y);
             switch (currMove)
             {
                 case (int)shapes.X:
+                    Render.addX(ref x, ref y);
                     grid[cellX, cellY] = (int)shapes.X;
                     currMove = (int)shapes.O;
-                    break;
+                break;
                 case (int)shapes.O:
+                    Render.addO(ref x, ref y);
                     grid[cellX, cellY] = (int)shapes.O;
                     currMove = (int)shapes.X;
-                    break;
+                break;
             }
         }
+
+        private static void translateCellToCoords(ref int cellX, ref int cellY, out int x, out int y)
+        {
+            switch (cellX)
+            {
+                case 0:
+                    x = (int)((0.33f / 2) * gridWidth);
+                break;
+                case 1:
+                    x = (int)(( (0.33f + 0.66f) / 2) * gridWidth);
+                break;
+                case 2:
+                    x = (int)(( (0.66f + 0.99f) / 2) * gridWidth);
+                break;
+                default:
+                    x = -1;
+                break;
+            }
+
+            switch (cellY)
+            {
+                case 0:
+                    y = (int)((0.33f / 2) * gridHeight);
+                    break;
+                case 1:
+                    y = (int)(((0.33f + 0.66f) / 2) * gridHeight);
+                    break;
+                case 2:
+                    y = (int)(((0.66f + 0.99f) / 2) * gridHeight);
+                    break;
+                default:
+                    y = -1;
+                break;
+            }
+        }
+
     }
 }
